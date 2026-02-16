@@ -2,6 +2,8 @@
 """
 オセロボット - 角・辺優先戦略
 角を取ることを優先し、次に辺を優先する
+
+入出力フォーマット: https://github.com/MultiStruct/Othello
 """
 
 import sys
@@ -38,7 +40,7 @@ def main():
     board_size = int(input())
 
     turn = 1
-    use_expert = True
+    expert_mode = True  # EXPERTモード有効化
 
     while True:
         turn += 1
@@ -50,7 +52,8 @@ def main():
             board.append(line)
 
         # EXPERTモード時：相手の手履歴
-        if turn > 2:
+        # ターン3以降で、かつ前ターンにEXPERTを出した場合に送信される
+        if expert_mode and turn > 2:
             last_moves = input()
 
         # 有効な手を読み込み
@@ -65,7 +68,7 @@ def main():
             # スコアでソート
             best_move = max(actions, key=score_move)
             msg = f"スコア:{score_move(best_move)}"
-            if use_expert:
+            if expert_mode:
                 print(f"EXPERT {best_move} MSG {msg}")
             else:
                 print(f"{best_move} MSG {msg}")

@@ -2,16 +2,19 @@
 """
 オセロボット - Codingame用
 シンプルな戦略：左上の有効な手を選ぶ
+
+入出力フォーマット: https://github.com/MultiStruct/Othello
 """
 
 import sys
 
 def main():
-    # 初回入力（プレイヤーIDと盤面サイズ）
+    # 初回入力（プレイヤーIDと盤面サイズ） - ターン1と2でのみ送信
     player_id = int(input())
     board_size = int(input())
 
     turn = 1
+    expert_mode = False
 
     while True:
         turn += 1
@@ -22,8 +25,9 @@ def main():
             line = input().strip()
             board.append(line)
 
-        # EXPERTモード時：相手の手履歴
-        if turn > 2:
+        # EXPERTモード時：相手の手履歴（EXPERT前は送信されない）
+        # ターン3以降で、かつ前ターンにEXPERTを出した場合に送信される
+        if expert_mode and turn > 2:
             last_moves = input()
 
         # 有効な手の数
@@ -39,6 +43,8 @@ def main():
         if actions:
             best_move = actions[0]
             print(f"{best_move} MSG 何でもできるよ")
+            # 次ターンからEXPERTモード有効
+            expert_mode = True
         else:
             # パス（有効な手がない場合）
             print("MSG パス...")
