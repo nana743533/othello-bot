@@ -1,6 +1,8 @@
 # Othello Bot for Codingame
 
-Codingameのオセロ（リバーシ）対戦用ボットです。
+[Codingame Othello](https://www.codingame.com/multiplayer/bot-programming/othello-1) 対戦用ボットです。
+
+**入力・出力フォーマットは [MultiStruct/Othello](https://github.com/MultiStruct/Othello) を参考にしています。**
 
 ## 入力フォーマット
 
